@@ -28,9 +28,11 @@ for role in keystone_client.roles.list():
 import collections
 user_adminships = collections.defaultdict(list)
 
+import sys
+role_name = sys.argv[1] if len(sys.argv) > 1 else 'user'
+
 for ra in keystone_client.role_assignments.list():
-    role_name = roles[ra.role['id']]
-    if role_name in ['projectadmin', 'user']:
+    if roles[ra.role['id']] == role_name:
         user_adminships[ra.user['id']].append(ra.scope['project']['id'])
 
 user_admincount = collections.Counter()

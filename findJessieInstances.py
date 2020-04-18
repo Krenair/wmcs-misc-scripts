@@ -24,8 +24,7 @@ keystone_client = KeystoneClient(
 )
 
 for project in keystone_client.projects.list():
-#    if project.name not in ['admin']:
-    if project.name == 'deployment-prep':
+    if project.name not in ['admin']:
         session = get_keystone_session(project.name)
 #for project in ['tools', 'toolsbeta']:
 #    if True:

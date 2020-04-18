@@ -31,7 +31,7 @@ for project in keystone_client.projects.list():
             client = novaclient.Client("2.0", session=session, region_name=region)
             for server in client.servers.list():
                 # OS-EXT-SRV-ATTR:host is the short name of the hypervisor, :hypervisor_hostname is the full FQDN including .eqiad.wmnet etc.
-                hypervisor_groups[getattr(server, 'OS-EXT-SRV-ATTR:hypervisor_hostname')].append(server.name + '.' + project.name + '.eqiad.wmflabs')
+                hypervisor_groups[str(getattr(server, 'OS-EXT-SRV-ATTR:hypervisor_hostname'))].append(server.name + '.' + project.name + '.eqiad.wmflabs')
 
 for hypervisor, instances in sorted(hypervisor_groups.items(), key=lambda t: t[0]):
     if len(sys.argv) > 1 and hypervisor not in sys.argv:
